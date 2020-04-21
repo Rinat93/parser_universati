@@ -17,12 +17,12 @@ class TreeBase:
     def insert(self, data):
         """ Добавляем новый элемент в дерево """
         if self.data:
-            if len(data) < len(self.data):
+            if len(data.css('::text')) < len(self.data.css('::text')):
                 if self.left is None:
                     self.left = TreeBase(data)
                 else:
                     self.left.insert(data)
-            elif len(data) > len(self.data):
+            elif len(data.css('::text')) > len(self.data.css('::text')):
                 if self.right is None:
                     self.right = TreeBase(self.data)
                 else:

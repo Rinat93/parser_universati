@@ -8,7 +8,7 @@ import os
 #     https://docs.scrapy.org/en/latest/topics/settings.html
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-from .regular_settings import *
+from .custom_settings import *
 BOT_NAME = 'site_parsers'
 
 SPIDER_MODULES = ['site_parsers.spiders']
@@ -68,9 +68,9 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#    'site_parsers.pipelines.SiteParsersPipeline': 300,
-# }
+ITEM_PIPELINES = {
+   'site_parsers.pipelines.DuplicatesPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
