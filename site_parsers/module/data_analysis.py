@@ -1,15 +1,21 @@
-'''
-    Решено было сделать хранилище данных в бинарном дереве, что-бы более удобно работать с элементами
-'''
-import re
+"""
+    Решено было сделать хранилище данных в бинарном дереве, что-бы более удобно
+        работать с элементами
+"""
+
+
 class TreeBase:
-    def __init__(self,data=None):
+    """
+        Инициализируем наше дерево
+    """
+
+    def __init__(self, data=None):
         self.left = None
         self.right = None
         self.data = data
 
-    # Добавляем новый элемент в дерево
-    def insert(self,data):
+    def insert(self, data):
+        """ Добавляем новый элемент в дерево """
         if self.data:
             if len(data) < len(self.data):
                 if self.left is None:
@@ -25,20 +31,9 @@ class TreeBase:
         else:
             self.data = data
 
-    # Для вывода дерева
-    def ListTree(self):
+    def list_tree(self):
+        """ Для вывода дерева """
         if self.right:
-            self.right.ListTree()
+            print(self.right.list_tree())
         if self.left:
-            self.left.ListTree()
-
-    def FormatingData(self):
-        self.data = re.sub(r'')
-# b = TreeBase()
-# for i in [[1,2,3],[4,4,4,4,4,4],[213,5],[2],[4,4,5,1,5,5,6,7]]:
-#     b.insert(i)
-#
-# # print(b.data)
-# print(b.ListTree())
-# for i in b:
-#     print(i)
+            print(self.left.list_tree())
