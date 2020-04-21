@@ -3,8 +3,6 @@
 """
 import scrapy
 import logging
-import re
-import os
 from site_parsers.module.data_analysis import TreeBase
 from site_parsers.module.filesystems import FileSystems
 logging.basicConfig(filename="info.log", level=logging.ERROR)
@@ -19,6 +17,7 @@ class TaskSpider(scrapy.Spider):
     settings_regular = None
     global_regular = None
     file_save = None
+
     def __init__(self, **kwargs):
         # Обязательно должен быть указан параметр url
         if 'url' in kwargs:
@@ -36,7 +35,7 @@ class TaskSpider(scrapy.Spider):
         """ Здесь происходить запрос к странице с указанием каллбэка """
         self._settings_regular_init()
 
-        self.file_save = FileSystems(urls=self.urls,settings=self.settings)
+        self.file_save = FileSystems(urls=self.urls, settings=self.settings)
 
         yield scrapy.Request(url=self.urls, callback=self.parse)
 

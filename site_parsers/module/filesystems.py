@@ -3,6 +3,7 @@ import textwrap
 import os
 import scrapy
 
+
 class FileSystems:
     text: str
     urls: str
@@ -29,7 +30,8 @@ class FileSystems:
         # Форматируем тег <a>
         for txt in html.css('a'):
             if txt.attrib.get('href'):
-                conf.append([''.join(txt.extract()),"{}[{}]".format(txt.css('::text').get(), txt.attrib['href'])])
+                conf.append([''.join(txt.extract()), "{}[{}]".format(txt.css('::text').get(),
+                                                                    txt.attrib['href'])])
 
         # Форматируем заголовки
         for head in html.css('h1,h2,h3'):
@@ -38,7 +40,7 @@ class FileSystems:
 
         # print(conf)
         for rep in conf:
-            res = res.replace(rep[0],rep[1])
+            res = res.replace(rep[0], rep[1])
 
         html = scrapy.selector.Selector(text=res)
 
@@ -46,13 +48,11 @@ class FileSystems:
         # Форматируем абзацы
         for abz in html.css('p'):
             for tags in self.settings.get('TAGS_ALLOWED'):
-                res=res.replace(''.join(abz.get()),abz.get().replace('<{}>'.format(tags),'<{}>***'.format(tags)))
+                res=res.replace(''.join(abz.get()), abz.get().replace('<{}>'.format(tags), '<{}>***'.format(tags)))
 
-        print(res)
         res = scrapy.selector.Selector(text=res).css('::text').getall()
 
-        # print(res)
-        return textwrap.fill(''.join(res), width=self.settings.get('LINE_MAX_LENGTH', 80)).replace('***','\n\n')
+        return textwrap.fill(''.join(res), width=self.settings.get('LINE_MAX_LENGTH', 80)).replace('***', '\n\n')
 
     def save(self):
         path = re.sub(self.settings['TEMPLATE_REGULAR_FILE'], '', self.urls)
