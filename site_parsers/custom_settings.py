@@ -4,9 +4,9 @@
 # TEMPLATE_REGULAR = '(?!.*{VARIABLE})'
 
 # Шаблон для разбора URL в путь до файла
-TEMPLATE_REGULAR_FILE = r"^((https:\/\/)(www\.)|(http:\/\/)|(www\.))"
+TEMPLATE_REGULAR_FILE = r"^((https:\/\/)|(www\.)|(http:\/\/)|(www\.))|(\/)$"
 
-TAGS_ALLOWED = ['p', 'h1','h2','span']
+TAGS_ALLOWED = ['p', 'h1','h2','h3','span']
 
 LINE_MAX_LENGTH = 80
 

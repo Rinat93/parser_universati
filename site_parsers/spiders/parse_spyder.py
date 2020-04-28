@@ -5,6 +5,7 @@ import scrapy
 import logging
 from site_parsers.module.data_analysis import TreeBase
 from site_parsers.module.filesystems import FileSystems
+
 logging.basicConfig(filename="info.log", level=logging.ERROR)
 
 
@@ -42,11 +43,9 @@ class TaskSpider(scrapy.Spider):
     def parse(self, response: scrapy.selector.SelectorList):
         """ Очищаем от ненужной информации """
         tree_data = TreeBase()
-        print(response.css('::text').getall())
         for element in response.css("body>div"):
             temp = element.css(','.join(self.settings.get('TAGS_ALLOWED')))
             if temp.css('::text') == 0: continue
             tree_data.insert(temp)
-        print(tree_data.data)
         self.file_save.start(tree_data.data)
         yield tree_data.data
